@@ -1,10 +1,29 @@
+import { CartLink, HeaderBackground, Links } from "./styles";
+
+import logo from "../../assets/images/logo.svg";
+import cart from "../../assets/images/carrinho.svg";
+
 const Header = () => (
-  <header>
-    <h1>Hello from Header!</h1>
-    <h2>This is as test</h2>
-    <p>Hello this is another test</p>
-    <p>testing again</p>
-  </header>
+  <HeaderBackground>
+    <img src={logo} alt="EPLAY" />
+    <nav>
+      <Links>
+        <li>
+          <a href="#">Categorias</a>
+        </li>
+        <li>
+          <a href="#">Novidades</a>
+        </li>
+        <li>
+          <a href="#">Promoções</a>
+        </li>
+      </Links>
+    </nav>
+    <CartLink>
+      <p>0 - Produto(s)</p>
+      <img src={cart} alt="Carrinho" />
+    </CartLink>
+  </HeaderBackground>
 );
 
 export default Header;
