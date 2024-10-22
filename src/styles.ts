@@ -20,9 +20,9 @@ export const GlobalStyles = createGlobalStyle`
       background-color: ${colors.black};
       color: ${colors.white};
     }
-`;
 
-export const Container = styled.div`
-  width: min(1024px, 100% - 4rem);
-  margin-inline: auto;
+    .container {
+      width: min(1024px, 100% - 4rem);
+      margin-inline: auto;    
+    }
 `;
