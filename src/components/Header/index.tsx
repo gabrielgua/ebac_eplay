@@ -6,7 +6,9 @@ import { Link } from "react-router-dom";
 
 const Header = () => (
   <HeaderBackground>
-    <img src={logo} alt="EPLAY" />
+    <Link to="/">
+      <img src={logo} alt="EPLAY" />
+    </Link>
     <nav>
       <Links>
         <li>
