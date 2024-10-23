@@ -4,7 +4,7 @@ import { colors } from "../../styles";
 import { ProductCard } from "../Product/styles";
 
 export const ProductListContainer = styled.section<
-  Omit<ProductListProps, "title">
+  Omit<ProductListProps, "title" | "games">
 >`
   padding-block: 3rem;
   background-color: ${(props) =>

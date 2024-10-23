@@ -2,6 +2,7 @@ import { CartLink, HeaderBackground, Links } from "./styles";
 
 import logo from "../../assets/images/logo.svg";
 import cart from "../../assets/images/carrinho.svg";
+import { Link } from "react-router-dom";
 
 const Header = () => (
   <HeaderBackground>
@@ -9,7 +10,7 @@ const Header = () => (
     <nav>
       <Links>
         <li>
-          <a href="#">Categorias</a>
+          <Link to="/categories">Categorias</Link>
         </li>
         <li>
           <a href="#">Novidades</a>
