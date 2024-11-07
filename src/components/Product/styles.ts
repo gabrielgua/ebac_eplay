@@ -5,6 +5,8 @@ export const ProductCard = styled.div`
   background-color: ${colors.gray};
   border-radius: 0.5rem;
   padding: 0.5rem;
+
+  max-height: 450px;
 `;
 
 export const ProductImgContainer = styled.div`
@@ -15,6 +17,9 @@ export const ProductImg = styled.img`
   border-radius: 0.25rem;
   display: block;
   width: 100%;
+  height: 250px;
+  object-position: top;
+  object-fit: cover;
 `;
 
 export const ProductImgTags = styled.div`
@@ -44,6 +49,11 @@ export const ProductTags = styled.div`
 export const ProductDescription = styled.p`
   font-size: 14px;
   line-height: 22px;
-  display: block;
   margin-block-start: 1rem;
+
+  display: -webkit-box;
+  max-width: 200px;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 `;

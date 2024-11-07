@@ -1,10 +1,9 @@
 import zelda from "../../assets/images/zelda.png";
-import spider from "../../assets/images/banner-homem-aranha.png";
 
 import {
   GalleryAction,
-  GalleryItem,
   GalleryList,
+  GalleryItem as GalleryItemStyles,
   Modal,
   ModalContent,
 } from "./styles";
@@ -13,15 +12,11 @@ import zoomIcon from "../../assets/images/zoom.png";
 import playIcon from "../../assets/images/play.png";
 import closeIcon from "../../assets/images/fechar.png";
 import { useState } from "react";
+import { GalleryItem } from "../../models/Game";
 
 type GalleryProps = {
   defaultCover: string;
   name: string;
-};
-
-type GalleryItem = {
-  type: "img" | "video";
-  url: string;
 };
 
 const mock: GalleryItem[] = [
@@ -64,7 +59,7 @@ const Gallery = ({ defaultCover, name }: GalleryProps) => {
     <>
       <GalleryList>
         {mock.map((m) => (
-          <GalleryItem
+          <GalleryItemStyles
             key={m.url}
             onClick={() => {
               setModalState({ isOpen: true, type: m.type, url: m.url });
@@ -74,7 +69,7 @@ const Gallery = ({ defaultCover, name }: GalleryProps) => {
             <GalleryAction>
               <img src={getMediaIcon(m)} alt="Zoom" />
             </GalleryAction>
-          </GalleryItem>
+          </GalleryItemStyles>
         ))}
       </GalleryList>
       <Modal className={modalState.isOpen ? "open" : ""}>

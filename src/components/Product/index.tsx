@@ -1,3 +1,4 @@
+import { Game } from "../../models/Game";
 import Tag from "../Tag";
 import {
   ProductCard,
@@ -25,23 +26,25 @@ const Product = ({
   description,
   infos,
   imageUrl,
-}: ProductProps) => (
-  <ProductCard>
-    <ProductImgContainer>
-      <ProductImg src={imageUrl} alt={title} />
-      <ProductImgTags>
-        {infos.map((info) => (
-          <Tag key={info}>{info}</Tag>
-        ))}
-      </ProductImgTags>
-    </ProductImgContainer>
-    <ProductTitle>{title}</ProductTitle>
-    <ProductTags>
-      <Tag>{category}</Tag>
-      <Tag>{platform}</Tag>
-    </ProductTags>
-    <ProductDescription>{description}</ProductDescription>
-  </ProductCard>
-);
+}: ProductProps) => {
+  return (
+    <ProductCard>
+      <ProductImgContainer>
+        <ProductImg src={imageUrl} alt={title} />
+        <ProductImgTags>
+          {infos.map((info) => (
+            <Tag key={info}>{info}</Tag>
+          ))}
+        </ProductImgTags>
+      </ProductImgContainer>
+      <ProductTitle>{title}</ProductTitle>
+      <ProductTags>
+        <Tag>{category}</Tag>
+        <Tag>{platform}</Tag>
+      </ProductTags>
+      <ProductDescription>{description}</ProductDescription>
+    </ProductCard>
+  );
+};
 
 export default Product;

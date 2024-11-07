@@ -1,29 +1,28 @@
-class Game {
+export type Game = {
   id: number;
-  title: string;
-  category: string;
-  platform: string;
+  name: string;
   description: string;
-  infos: string[];
-  image: string;
+  release_date?: string;
+  prices: {
+    discount?: number;
+    old?: number;
+    current: number;
+  };
+  details: {
+    category: string;
+    system: string;
+    developer: string;
+    publisher: string;
+    languages: string[];
+  };
+  media: {
+    thumbnail: string;
+    cover: string;
+    gallery: GalleryItem[];
+  };
+};
 
-  constructor(
-    id: number,
-    title: string,
-    category: string,
-    platform: string,
-    description: string,
-    infos: string[],
-    image: string
-  ) {
-    this.id = id;
-    this.title = title;
-    this.category = category;
-    this.platform = platform;
-    this.description = description;
-    this.infos = infos;
-    this.image = image;
-  }
-}
-
-export default Game;
+export type GalleryItem = {
+  type: "img" | "video";
+  url: string;
+};

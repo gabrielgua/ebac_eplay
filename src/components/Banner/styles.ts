@@ -11,9 +11,20 @@ export const HeroImage = styled.div`
   background-repeat: no-repeat;
   margin-top: 2rem;
   font-weight: bold;
+  position: relative;
 
   display: flex;
   flex-direction: column;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
 `;
 
 export const HeroInfoContainer = styled.div`
@@ -21,6 +32,7 @@ export const HeroInfoContainer = styled.div`
   flex-direction: column;
   height: 100%;
   margin-block: 2rem;
+  z-index: 1;
 
   ${TagContainer} {
     grid-column: span 2;
