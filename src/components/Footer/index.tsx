@@ -24,6 +24,7 @@ const Footer = () => (
         <h4>Acesso rápido</h4>
         <FooterLinks>
           <FooterLink>Novidades</FooterLink>
+
           <FooterLink>Promoções</FooterLink>
           <FooterLink>Em breve</FooterLink>
         </FooterLinks>

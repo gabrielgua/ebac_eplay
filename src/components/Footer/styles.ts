@@ -3,7 +3,7 @@ import { colors } from "../../styles";
 
 export const FooterContainer = styled.footer`
   background-color: ${colors.gray};
-  padding-block: 1rem;
+  padding-block: 2rem;
 
   .container {
     display: flex;
@@ -12,7 +12,9 @@ export const FooterContainer = styled.footer`
   }
 `;
 
-export const FooterSection = styled.div``;
+export const FooterSection = styled.div`
+  margin-block: 0.5rem;
+`;
 
 export const FooterLinks = styled.ul`
   display: flex;
