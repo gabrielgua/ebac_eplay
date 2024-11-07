@@ -23,6 +23,6 @@ export type Game = {
 };
 
 export type GalleryItem = {
-  type: "img" | "video";
+  type: "image" | "video";
   url: string;
 };

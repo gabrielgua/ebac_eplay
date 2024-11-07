@@ -1,4 +1,3 @@
-import { Game } from "../../models/Game";
 import Tag from "../Tag";
 import {
   ProductCard,
@@ -11,6 +10,7 @@ import {
 } from "./styles";
 
 export type ProductProps = {
+  id: number;
   title: string;
   category: string;
   platform: string;
@@ -20,6 +20,7 @@ export type ProductProps = {
 };
 
 const Product = ({
+  id,
   title,
   category,
   platform,
@@ -28,7 +29,7 @@ const Product = ({
   imageUrl,
 }: ProductProps) => {
   return (
-    <ProductCard>
+    <ProductCard to={`/game/${id}`}>
       <ProductImgContainer>
         <ProductImg src={imageUrl} alt={title} />
         <ProductImgTags>

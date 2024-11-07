@@ -1,5 +1,3 @@
-import zelda from "../../assets/images/zelda.png";
-
 import {
   GalleryAction,
   GalleryList,
@@ -17,40 +15,36 @@ import { GalleryItem } from "../../models/Game";
 type GalleryProps = {
   defaultCover: string;
   name: string;
+  items: GalleryItem[];
 };
 
-const mock: GalleryItem[] = [
-  { type: "img", url: zelda },
-  { type: "video", url: "https://www.youtube.com/embed/uHGShqcAHlQ" },
-];
-
 type ModalState = {
-  type: "img" | "video";
+  type: "image" | "video";
   url: string;
   isOpen: boolean;
 };
 
-const Gallery = ({ defaultCover, name }: GalleryProps) => {
+const Gallery = ({ defaultCover, name, items }: GalleryProps) => {
   const [modalState, setModalState] = useState<ModalState>({
     isOpen: false,
-    type: "img",
+    type: "image",
     url: "",
   });
 
   const getMediaCover = (item: GalleryItem) => {
-    if (item.type === "img") return item.url;
+    if (item.type === "image") return item.url;
 
     return defaultCover;
   };
 
   const getMediaIcon = (item: GalleryItem) => {
-    return item.type === "img" ? zoomIcon : playIcon;
+    return item.type === "image" ? zoomIcon : playIcon;
   };
 
   const closeModal = () => {
     setModalState({
       isOpen: false,
-      type: "img",
+      type: "image",
       url: "",
     });
   };
@@ -58,7 +52,7 @@ const Gallery = ({ defaultCover, name }: GalleryProps) => {
   return (
     <>
       <GalleryList>
-        {mock.map((m) => (
+        {items.map((m) => (
           <GalleryItemStyles
             key={m.url}
             onClick={() => {
@@ -80,7 +74,7 @@ const Gallery = ({ defaultCover, name }: GalleryProps) => {
               <img src={closeIcon} alt="Fechar" />
             </button>
           </header>
-          {modalState.type === "img" ? (
+          {modalState.type === "image" ? (
             <img src={modalState.url} alt="Salve" />
           ) : (
             <iframe src={modalState.url}></iframe>

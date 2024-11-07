@@ -1,12 +1,20 @@
 import styled from "styled-components";
 import { colors } from "../../styles";
+import { Link } from "react-router-dom";
 
-export const ProductCard = styled.div`
+export const ProductCard = styled(Link)`
   background-color: ${colors.gray};
+  text-decoration: none;
   border-radius: 0.5rem;
   padding: 0.5rem;
+  color: ${colors.white};
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 
-  max-height: 450px;
+  /* &:hover > img {
+    scale: 1.05;
+  } */
 `;
 
 export const ProductImgContainer = styled.div`
@@ -20,6 +28,7 @@ export const ProductImg = styled.img`
   height: 250px;
   object-position: top;
   object-fit: cover;
+  transition: scale 250ms ease;
 `;
 
 export const ProductImgTags = styled.div`
@@ -44,6 +53,7 @@ export const ProductTitle = styled.h3`
 export const ProductTags = styled.div`
   display: flex;
   gap: 0.5rem;
+  margin-top: auto;
 `;
 
 export const ProductDescription = styled.p`
@@ -52,7 +62,7 @@ export const ProductDescription = styled.p`
   margin-block-start: 1rem;
 
   display: -webkit-box;
-  max-width: 200px;
+  /* max-width: 200px; */
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;

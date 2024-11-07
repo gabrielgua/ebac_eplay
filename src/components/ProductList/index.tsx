@@ -30,15 +30,17 @@ const ProductList = ({ games }: ProductListProps) => {
   return (
     <ProductListGrid>
       {games.map((game) => (
-        <Product
-          key={game.id}
-          title={game.name}
-          category={game.details.category}
-          description={game.description}
-          imageUrl={game.media.thumbnail}
-          infos={getGameTags(game)}
-          platform={game.details.system}
-        ></Product>
+        <li key={game.id}>
+          <Product
+            id={game.id}
+            title={game.name}
+            category={game.details.category}
+            description={game.description}
+            imageUrl={game.media.thumbnail}
+            infos={getGameTags(game)}
+            platform={game.details.system}
+          />
+        </li>
       ))}
     </ProductListGrid>
   );
