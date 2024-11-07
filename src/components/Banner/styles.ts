@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { TagContainer } from "../Tag/styles";
-import Button from "../Button";
 import { ButtonLink } from "../Button/styles";
 
 export const HeroImage = styled.div`
@@ -10,7 +9,7 @@ export const HeroImage = styled.div`
   background-size: cover;
   background-position: top;
   background-repeat: no-repeat;
-  margin-top: 4rem;
+  margin-top: 2rem;
   font-weight: bold;
 
   display: flex;

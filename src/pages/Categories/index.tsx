@@ -6,6 +6,7 @@ import resident from "../../assets/images/resident.png";
 import diablo from "../../assets/images/diablo.png";
 import starWars from "../../assets/images/star_wars.png";
 import zelda from "../../assets/images/zelda.png";
+import Section from "../../components/Section";
 
 const games: Game[] = [
   {
@@ -53,9 +54,15 @@ const games: Game[] = [
 const Categories = () => (
   <>
     <Banner />
-    <ProductList title="RPG" bgTheme="gray" games={games} />
-    <ProductList title="Aventura" bgTheme="black" games={games} />
-    <ProductList title="Tiro em primeira pessoa" bgTheme="gray" games={games} />
+    <Section title="RPG">
+      <ProductList games={games} />
+    </Section>
+    <Section title="Aventura" theme="gray">
+      <ProductList games={games} />
+    </Section>
+    <Section title="Tiro em primeira pessoa">
+      <ProductList games={games} />
+    </Section>
   </>
 );
 
