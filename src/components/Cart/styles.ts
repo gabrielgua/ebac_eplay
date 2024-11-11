@@ -12,7 +12,7 @@ export const CartWrapper = styled.div`
   justify-content: flex-end;
   z-index: 2;
 
-  .visible {
+  &.visible {
     display: flex;
   }
 `;

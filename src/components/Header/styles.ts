@@ -35,7 +35,7 @@ export const Links = styled.ul`
   gap: 1rem;
 `;
 
-export const CartLink = styled.a`
+export const CartButton = styled.a`
   display: flex;
   gap: 1rem;
   align-items: center;
