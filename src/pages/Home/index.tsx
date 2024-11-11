@@ -12,10 +12,10 @@ const Home = () => {
     return (
       <>
         <Banner />
-        <Section title="Promoções" theme="gray">
+        <Section title="Promoções" theme="gray" id="on-sale">
           <ProductList games={onSale} />
         </Section>
-        <Section title="Serão lançados em breve" theme="black">
+        <Section title="Serão lançados em breve" theme="black" id="coming-soon">
           <ProductList games={soon} />
         </Section>
       </>
