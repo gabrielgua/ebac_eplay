@@ -22,10 +22,17 @@ const cartSlice = createSlice({
       state.visible = false;
     },
     add: (state, action: PayloadAction<Game>) => {
-      state.items.push(action.payload);
+      const game = state.items.find((g) => g.id === action.payload.id);
+
+      if (!game) {
+        state.items.push(action.payload);
+      }
+    },
+    remove: (state, action: PayloadAction<number>) => {
+      state.items = state.items.filter((game) => game.id !== action.payload);
     },
   },
 });
 
-export const { add, open, close } = cartSlice.actions;
+export const { add, remove, open, close } = cartSlice.actions;
 export default cartSlice.reducer;

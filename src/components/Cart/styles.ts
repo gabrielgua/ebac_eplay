@@ -102,21 +102,13 @@ export const CartItemTags = styled.div`
 export const CartItemRemoveButton = styled.button`
   border: none;
   cursor: pointer;
-  position: absolute;
-  right: -0.5rem;
-  top: 0.5rem;
-  padding: 0.5rem;
-  border-radius: 50%;
   background-color: transparent;
   display: grid;
   place-items: center;
+  align-self: flex-start;
 
   > img {
     width: 16px;
     height: 16px;
-  }
-
-  &:hover {
-    background-color: ${colors.black};
   }
 `;
