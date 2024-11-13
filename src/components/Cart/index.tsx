@@ -12,13 +12,12 @@ import {
   CartWrapper,
 } from "./styles";
 
-import img from "../../assets/images/star_wars.png";
-import Tag from "../Tag";
-import closeIcon from "../../assets/images/fechar.png";
 import { useDispatch, useSelector } from "react-redux";
+import closeIcon from "../../assets/images/fechar.png";
 import { RootReducer } from "../../store";
 import { close, remove } from "../../store/reducers/cart";
 import { formatPrice } from "../ProductList";
+import Tag from "../Tag";
 
 const Cart = () => {
   const { visible, items } = useSelector((state: RootReducer) => state.cart);
