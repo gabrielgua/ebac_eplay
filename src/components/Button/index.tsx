@@ -6,7 +6,8 @@ export type ButtonProps = {
   title?: string;
   to?: string;
   onClick?: () => void;
-  variant?: "primary" | "secondary" | "terciary";
+  $variant?: "primary" | "secondary" | "terciary";
+  submit?: boolean;
 };
 
 const Button = ({
@@ -15,13 +16,14 @@ const Button = ({
   children,
   title,
   onClick,
-  variant = "primary",
+  $variant: variant = "primary",
+  submit,
 }: ButtonProps) => {
   if (type === "button") {
     return (
       <ButtonContainer
-        variant={variant}
-        type="button"
+        $variant={variant}
+        type={submit ? "submit" : "button"}
         title={title ? title : ""}
         onClick={onClick}
       >

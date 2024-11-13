@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { colors } from "../../styles";
 import { ButtonContainer } from "../../components/Button/styles";
 
-export const CheckoutWrapper = styled.div`
+export const CheckoutWrapper = styled.form`
   margin-block: 4rem;
 
   > ${ButtonContainer} {
@@ -14,16 +14,21 @@ export const ContentRow = styled.div`
   display: flex;
   align-items: flex-end;
   gap: 1rem;
-  /* flex-wrap: wrap; */
+  flex-wrap: wrap;
 `;
 
 type ContentInputGroupProps = {
-  maxWidth?: string;
+  $maxwidth?: string;
 };
 
 export const ContentInputGroup = styled.div<ContentInputGroupProps>`
   flex: auto;
-  max-width: ${(props) => props.maxWidth || "auto"};
+  max-width: ${(props) => props.$maxwidth || "auto"};
+
+  @media (max-width: 768px) {
+    max-width: none;
+    flex-grow: 1;
+  }
 
   label {
     display: block;
@@ -39,5 +44,9 @@ export const ContentInputGroup = styled.div<ContentInputGroupProps>`
     border-radius: 0.25rem;
     padding: 0.5rem;
     border: none;
+  }
+
+  small {
+    color: red;
   }
 `;

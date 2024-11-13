@@ -3,11 +3,11 @@ import { colors } from "../../styles";
 import { Link } from "react-router-dom";
 import { ButtonProps } from ".";
 
-export const ButtonContainer = styled.button<ButtonProps>`
+export const ButtonContainer = styled.button<Omit<ButtonProps, "type">>`
   background-color: ${(props) =>
-    props.variant === "secondary"
+    props.$variant === "secondary"
       ? "transparent"
-      : props.variant === "primary"
+      : props.$variant === "primary"
         ? colors.green
         : colors.black};
   font-size: 16px;
@@ -15,7 +15,7 @@ export const ButtonContainer = styled.button<ButtonProps>`
   color: ${colors.white};
   padding: 0.5rem 0.75rem;
   border: ${(props) =>
-    props.variant === "secondary" ? `2px solid ${colors.white}` : "none"};
+    props.$variant === "secondary" ? `2px solid ${colors.white}` : "none"};
   text-decoration: none;
   border-radius: 0.75rem;
   cursor: pointer;
