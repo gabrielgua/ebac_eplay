@@ -1,12 +1,12 @@
 import { ButtonContainer, ButtonLink } from "./styles";
 
 export type ButtonProps = {
-  children: string;
+  children: string | JSX.Element;
   type: "button" | "link";
   title?: string;
   to?: string;
   onClick?: () => void;
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "terciary";
 };
 
 const Button = ({
@@ -22,7 +22,7 @@ const Button = ({
       <ButtonContainer
         variant={variant}
         type="button"
-        title={title ? title : children}
+        title={title ? title : ""}
         onClick={onClick}
       >
         {children}

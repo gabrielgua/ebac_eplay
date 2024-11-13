@@ -5,16 +5,37 @@ import { ButtonProps } from ".";
 
 export const ButtonContainer = styled.button<ButtonProps>`
   background-color: ${(props) =>
-    props.variant === "primary" ? colors.green : "transparent"};
+    props.variant === "secondary"
+      ? "transparent"
+      : props.variant === "primary"
+        ? colors.green
+        : colors.black};
   font-size: 16px;
-  font-weight: bold;
+
   color: ${colors.white};
-  padding: 0.75rem 1rem;
+  padding: 0.5rem 0.75rem;
   border: ${(props) =>
-    props.variant === "primary" ? "none" : `2px solid ${colors.white}`};
+    props.variant === "secondary" ? `2px solid ${colors.white}` : "none"};
   text-decoration: none;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
   cursor: pointer;
+  font-weight: bold;
+
+  transition: all 150ms ease;
+
+  span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    img {
+      display: block;
+    }
+
+    p {
+      font-weight: bold;
+    }
+  }
 `;
 
 export const ButtonLink = styled(Link)`
@@ -23,7 +44,7 @@ export const ButtonLink = styled(Link)`
   font-size: 16px;
   font-weight: bold;
   color: ${colors.white};
-  padding: 0.75rem 1rem;
+  padding: 0.5rem 0.75rem;
   border-radius: 0.5rem;
   border: 2px solid ${colors.white};
   text-decoration: none;
