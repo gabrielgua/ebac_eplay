@@ -1,6 +1,7 @@
 import Banner from "../../components/Banner";
 import ProductList from "../../components/ProductList";
 import Section from "../../components/Section";
+import Spinner from "../../components/Spinner";
 
 import { useGetOnSaleQuery, useGetSoonQuery } from "../../services/api";
 
@@ -22,7 +23,7 @@ const Home = () => {
     );
   }
 
-  return <h3>Carregando...</h3>;
+  return <Spinner />;
 };
 
 export default Home;

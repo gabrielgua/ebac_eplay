@@ -5,7 +5,6 @@ export const HeroBannerWrapper = styled.div`
   margin-block-start: 2rem;
   position: relative;
   display: block;
-  height: 480px;
   width: 100%;
 
   background-repeat: no-repeat;
@@ -29,11 +28,11 @@ export const HeroBannerWrapper = styled.div`
 `;
 
 export const HeroInfoWrapper = styled.div`
-  height: 100%;
   padding-block-start: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 480px;
 `;
 
 export const HeroTags = styled.div`

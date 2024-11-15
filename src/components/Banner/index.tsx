@@ -5,12 +5,13 @@ import { formatPrice } from "../ProductList";
 import Tag from "../Tag";
 
 import { useGetFeaturedQuery } from "../../services/api";
+import Spinner from "../Spinner";
 
 const Banner = () => {
   const { data: game, isLoading } = useGetFeaturedQuery();
 
   if (!game) {
-    return <h3>"Loading..."</h3>;
+    return <Spinner />;
   }
 
   return (

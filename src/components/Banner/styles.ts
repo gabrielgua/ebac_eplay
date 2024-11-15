@@ -4,10 +4,8 @@ import { ButtonLink } from "../Button/styles";
 
 export const HeroImage = styled.div`
   width: 100%;
-  height: 560px;
-  display: block;
   background-size: cover;
-  background-position: top;
+  background-position: center;
   background-repeat: no-repeat;
   margin-top: 2rem;
   font-weight: bold;
@@ -22,7 +20,7 @@ export const HeroImage = styled.div`
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 560px;
     background-color: rgba(0, 0, 0, 0.7);
   }
 `;
@@ -30,9 +28,9 @@ export const HeroImage = styled.div`
 export const HeroInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
-  margin-block: 2rem;
+  padding-block: 2rem;
   z-index: 1;
+  height: 560px;
 
   ${TagContainer} {
     grid-column: span 2;

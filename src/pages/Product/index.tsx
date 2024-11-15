@@ -4,12 +4,17 @@ import Hero from "../../components/Hero";
 import Section from "../../components/Section";
 
 import { useGetGameQuery } from "../../services/api";
+import Spinner from "../../components/Spinner";
+
+type GameParams = {
+  id: string;
+};
 
 const Game = () => {
-  const { id } = useParams();
-  const { data: game, isLoading } = useGetGameQuery(id!);
+  const { id } = useParams() as GameParams;
+  const { data: game } = useGetGameQuery(id);
 
-  if (!game) return <h2>Loading...</h2>;
+  if (!game) return <Spinner />;
 
   return (
     <>

@@ -5,6 +5,7 @@ import { HashLink } from "react-router-hash-link";
 export const FooterContainer = styled.footer`
   background-color: ${colors.gray};
   padding-block: 2rem;
+  margin-top: auto;
 
   .container {
     display: flex;
