@@ -5,11 +5,10 @@ export const HeaderBackground = styled.header`
   background-color: ${colors.gray};
   margin-top: 2rem;
   padding: 1.5rem;
-  gap: 2rem;
   border-radius: 1rem;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 2rem;
 
   img {
     display: block;
@@ -28,15 +27,70 @@ export const HeaderBackground = styled.header`
   nav {
     margin-right: auto;
   }
+
+  @media (max-width: 768px) {
+    nav {
+      display: none;
+    }
+  }
+`;
+
+export const HeaderRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &.invisible {
+    display: none;
+  }
 `;
 
 export const Links = styled.ul`
   display: flex;
-  gap: 1rem;
+  flex-grow: 1;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 1rem;
+
+    * {
+      display: block;
+    }
+
+    li > a {
+      padding: 0.5rem 0;
+    }
+  }
 `;
 
 export const CartButton = styled.a`
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
   align-items: center;
+  cursor: pointer;
+
+  @media (max-width: 768px) {
+    span {
+      display: none;
+    }
+  }
+`;
+
+export const HamburguerMenuIcon = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  cursor: pointer;
+
+  span {
+    height: 2px;
+    display: block;
+    width: 1.25rem;
+    background-color: ${colors.white};
+    border-radius: 0.25rem;
+  }
+
+  @media (min-width: 768px) {
+    display: none;
+  }
 `;
