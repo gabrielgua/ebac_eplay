@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../../components/Button";
 import Card from "../../components/Card";
-import { CheckoutWrapper, ContentInputGroup, ContentRow } from "./styles";
+import {
+  CheckoutWrapper,
+  ContentInputGroup,
+  ContentRow,
+  LoadingCheckout,
+} from "./styles";
 
 import { useFormik } from "formik";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import * as Yup from "yup";
 import boletoImg from "../../assets/images/boleto.png";
@@ -13,16 +18,17 @@ import { usePurchaseMutation } from "../../services/api";
 import { RootReducer } from "../../store";
 import { calculateTotalPrice } from "../../components/Cart";
 import { formatPrice } from "../../components/ProductList";
+import Spinner from "../../components/Spinner";
+import ReactInputMask from "react-input-mask";
+import { clear } from "../../store/reducers/cart";
 
 const Checkout = () => {
+  const dispatch = useDispatch();
   const { items } = useSelector((state: RootReducer) => state.cart);
-
   const [paymentMethod, setPaymentMethod] = useState<"card" | "boleto">(
     "boleto"
   );
-
-  const [purchase, { data, isLoading, isError, isSuccess }] =
-    usePurchaseMutation();
+  const [purchase, { data, isLoading, isSuccess }] = usePurchaseMutation();
 
   const getErrorMessage = (field: string, message?: string) => {
     const isTouched = field in form.touched;
@@ -32,6 +38,12 @@ const Checkout = () => {
       return message;
     }
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(clear());
+    }
+  }, [isSuccess, dispatch]);
 
   type Installment = {
     qnt: number;
@@ -60,9 +72,9 @@ const Checkout = () => {
       cardOwnerCpf: "",
       cardNumber: "",
       cardName: "",
-      cardExpiryMonth: 0,
-      cardExpiryYear: 0,
-      cardCvv: 0,
+      cardExpiryMonth: "",
+      cardExpiryYear: "",
+      cardCvv: "",
       installments: 1,
     },
     validationSchema: Yup.object({
@@ -96,14 +108,11 @@ const Checkout = () => {
         )
         .min(14)
         .max(14),
-      cardNumber: Yup.string()
-        .when((values, schema) =>
-          paymentMethod === "card"
-            ? schema.required("O campo é obrigatório")
-            : schema
-        )
-        .min(14)
-        .max(14),
+      cardNumber: Yup.string().when((values, schema) =>
+        paymentMethod === "card"
+          ? schema.required("O campo é obrigatório")
+          : schema
+      ),
       cardName: Yup.string()
         .when((values, schema) =>
           paymentMethod === "card"
@@ -111,17 +120,17 @@ const Checkout = () => {
             : schema
         )
         .min(5),
-      cardExpiryMonth: Yup.number().when((values, schema) =>
+      cardExpiryMonth: Yup.string().when((values, schema) =>
         paymentMethod === "card"
           ? schema.required("O campo é obrigatório")
           : schema
       ),
-      cardExpiryYear: Yup.number().when((values, schema) =>
+      cardExpiryYear: Yup.string().when((values, schema) =>
         paymentMethod === "card"
           ? schema.required("O campo é obrigatório")
           : schema
       ),
-      cardCvv: Yup.number().when((values, schema) =>
+      cardCvv: Yup.string().when((values, schema) =>
         paymentMethod === "card"
           ? schema.required("O campo é obrigatório")
           : schema
@@ -133,8 +142,6 @@ const Checkout = () => {
       ),
     }),
     onSubmit: (values) => {
-      console.log(values);
-
       purchase({
         billing: {
           document: values.cpf,
@@ -145,14 +152,14 @@ const Checkout = () => {
           email: values.deliveryEmail,
         },
         payment: {
-          installments: 1,
+          installments: values.installments,
           card: {
             active: paymentMethod === "card",
             name: values.cardName,
-            code: values.cardCvv,
+            code: Number(values.cardCvv),
             expires: {
-              month: values.cardExpiryMonth,
-              year: values.cardExpiryYear,
+              month: Number(values.cardExpiryMonth),
+              year: Number(values.cardExpiryYear),
             },
             number: values.cardNumber,
             owner: {
@@ -161,47 +168,52 @@ const Checkout = () => {
             },
           },
         },
-        products: [
-          {
-            id: 1,
-            price: 250,
-          },
-        ],
+        products: items.map((item) => ({
+          id: item.id,
+          price: item.prices.current,
+        })),
       });
     },
   });
 
-  if (!items.length) {
+  if (!items.length && !isSuccess) {
     return <Navigate to="/"></Navigate>;
   }
 
   return (
     <div className="container">
-      {isSuccess ? (
-        <Card title="Pedido realizado">
-          <div>
-            <p>Seu pedido foi realizado com sucesso!</p>
-            <strong>Seguem os detalhes do pedido: </strong>
-            <p>
-              <strong>Número do pedido: </strong>
-              {data.orderId}
-            </p>
-            <p>
-              <strong>Forma de pagamento: </strong>
-              {paymentMethod === "card"
-                ? "Cartão de crédito"
-                : "Boleto bancário"}
-            </p>
-            <br />
-            <br />
-            <p>
-              Agradecemos por nos escolher e esperamos que desfrute do seu novo
-              jogo!
-            </p>
-          </div>
-        </Card>
+      {isSuccess && data ? (
+        <CheckoutWrapper>
+          <Card title="Pedido realizado">
+            <div>
+              <p>Seu pedido foi realizado com sucesso!</p>
+              <strong>Seguem os detalhes do pedido: </strong>
+              <p>
+                <strong>Número do pedido: </strong>
+                {data.orderId}
+              </p>
+              <p>
+                <strong>Forma de pagamento: </strong>
+                {paymentMethod === "card"
+                  ? "Cartão de crédito"
+                  : "Boleto bancário"}
+              </p>
+              <br />
+              <br />
+              <p>
+                Agradecemos por nos escolher e esperamos que desfrute do seu
+                novo jogo!
+              </p>
+            </div>
+          </Card>
+        </CheckoutWrapper>
       ) : (
         <CheckoutWrapper onSubmit={form.handleSubmit}>
+          {isLoading && (
+            <LoadingCheckout>
+              <Spinner />
+            </LoadingCheckout>
+          )}
           <Card title="Dados de cobrança">
             <ContentRow>
               <ContentInputGroup>
@@ -232,7 +244,8 @@ const Checkout = () => {
               </ContentInputGroup>
               <ContentInputGroup>
                 <label htmlFor="cpf">CPF</label>
-                <input
+                <ReactInputMask
+                  mask="999.999.999-99"
                   id="cpf"
                   type="text"
                   name="cpf"
@@ -337,7 +350,8 @@ const Checkout = () => {
                       <label htmlFor="cardOwnerCpf">
                         CPF do titular do cartão
                       </label>
-                      <input
+                      <ReactInputMask
+                        mask="999.999.999-99"
                         id="cardOwnerCpf"
                         type="text"
                         name="cardOwnerCpf"
@@ -356,7 +370,8 @@ const Checkout = () => {
                   <ContentRow>
                     <ContentInputGroup>
                       <label htmlFor="cardNumber">Número do cartão</label>
-                      <input
+                      <ReactInputMask
+                        mask="9999 9999 9999 9999"
                         id="cardNumber"
                         type="text"
                         name="cardNumber"
@@ -384,9 +399,10 @@ const Checkout = () => {
                     </ContentInputGroup>
                     <ContentInputGroup $maxwidth="123px">
                       <label htmlFor="cardExpiryMonth">Mês do vencimento</label>
-                      <input
+                      <ReactInputMask
+                        mask="99"
                         id="cardExpiryMonth"
-                        type="number"
+                        type="text"
                         name="cardExpiryMonth"
                         value={form.values.cardExpiryMonth}
                         onChange={form.handleChange}
@@ -401,9 +417,10 @@ const Checkout = () => {
                     </ContentInputGroup>
                     <ContentInputGroup $maxwidth="123px">
                       <label htmlFor="cardExpiryYear">Ano do vencimento</label>
-                      <input
+                      <ReactInputMask
+                        mask="9999"
                         id="cardExpiryYear"
-                        type="number"
+                        type="text"
                         name="cardExpiryYear"
                         value={form.values.cardExpiryYear}
                         onChange={form.handleChange}
@@ -418,10 +435,10 @@ const Checkout = () => {
                     </ContentInputGroup>
                     <ContentInputGroup $maxwidth="54px">
                       <label htmlFor="cardCvv">CVV</label>
-                      <input
+                      <ReactInputMask
+                        mask="999"
                         id="cardCvv"
-                        type="number"
-                        max="999"
+                        type="text"
                         name="cardCvv"
                         value={form.values.cardCvv}
                         onChange={form.handleChange}
@@ -462,8 +479,8 @@ const Checkout = () => {
               )}
             </>
           </Card>
-          <Button type="button" submit>
-            Finalizar compra
+          <Button type="button" submit disabled={isLoading}>
+            {isLoading ? "Finalizando sua compra..." : "Finalizar compra"}
           </Button>
         </CheckoutWrapper>
       )}

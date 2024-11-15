@@ -1,8 +1,10 @@
 import styled from "styled-components";
-import { colors } from "../../styles";
 import { ButtonContainer } from "../../components/Button/styles";
+import { SpinnerWrapper } from "../../components/Spinner/styles";
+import { colors } from "../../styles";
 
 export const CheckoutWrapper = styled.form`
+  position: relative;
   margin-block: 4rem;
 
   > ${ButtonContainer} {
@@ -49,4 +51,17 @@ export const ContentInputGroup = styled.div<ContentInputGroupProps>`
   small {
     color: red;
   }
+`;
+
+export const LoadingCheckout = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.5rem;
+
+  display: grid;
+  place-items: center;
+  background-color: rgba(0, 0, 0, 0.7);
 `;

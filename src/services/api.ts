@@ -2,6 +2,10 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { Game } from "../models/Game";
 import { Purchase } from "../models/Purchase";
 
+type PurchaseResponse = {
+  orderId: string;
+};
+
 const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "https://fake-api-tau.vercel.app/api/eplay",
@@ -34,7 +38,7 @@ const api = createApi({
     getGame: builder.query<Game, string>({
       query: (id) => `jogos/${id}`,
     }),
-    purchase: builder.mutation<any, Purchase>({
+    purchase: builder.mutation<PurchaseResponse, Purchase>({
       query: (body) => ({
         url: "checkout",
         method: "POST",
