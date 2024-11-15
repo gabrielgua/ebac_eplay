@@ -18,6 +18,10 @@ import { HashLink } from "react-router-hash-link";
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  const closeMobile = () => {
+    setMobileOpen(false);
+  };
+
   const { items } = useSelector((state: RootReducer) => state.cart);
   const dispatch = useDispatch();
 
@@ -33,7 +37,7 @@ const Header = () => {
           <span />
           <span />
         </HamburguerMenuIcon>
-        <Link to="/">
+        <Link to="/" onClick={closeMobile}>
           <img src={logo} alt="EPLAY" />
         </Link>
         <nav>
@@ -59,19 +63,19 @@ const Header = () => {
       <HeaderRow className={mobileOpen ? "" : "invisible"}>
         <Links>
           <li>
-            <a>
-              <Link to="/categories">Categorias</Link>
-            </a>
+            <Link to="/categories" onClick={closeMobile}>
+              Categorias
+            </Link>
           </li>
           <li>
-            <a>
-              <HashLink to="/#coming-soon">Novidades</HashLink>
-            </a>
+            <HashLink to="/#coming-soon" onClick={closeMobile}>
+              Novidades
+            </HashLink>
           </li>
           <li>
-            <a>
-              <HashLink to="/#on-sale">Promoções</HashLink>
-            </a>
+            <HashLink to="/#on-sale" onClick={closeMobile}>
+              Promoções
+            </HashLink>
           </li>
         </Links>
       </HeaderRow>

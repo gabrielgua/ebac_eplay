@@ -5,11 +5,13 @@ import { ButtonProps } from ".";
 
 export const ButtonContainer = styled.button<Omit<ButtonProps, "type">>`
   background-color: ${(props) =>
-    props.$variant === "secondary"
-      ? "transparent"
-      : props.$variant === "primary"
-        ? colors.green
-        : colors.black};
+    props.disabled
+      ? colors.black
+      : props.$variant === "secondary"
+        ? "transparent"
+        : props.$variant === "primary"
+          ? colors.green
+          : colors.black};
   font-size: 16px;
 
   color: ${colors.white};
@@ -18,8 +20,9 @@ export const ButtonContainer = styled.button<Omit<ButtonProps, "type">>`
     props.$variant === "secondary" ? `2px solid ${colors.white}` : "none"};
   text-decoration: none;
   border-radius: 0.75rem;
-  cursor: pointer;
+  cursor: ${(props) => (props.disabled ? "default" : "pointer")};
   font-weight: bold;
+  opacity: ${(props) => (props.disabled ? "0.4" : "1")};
 
   transition: all 150ms ease;
 

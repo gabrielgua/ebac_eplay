@@ -18,8 +18,17 @@ import { RootReducer } from "../../store";
 import { close, remove } from "../../store/reducers/cart";
 import { formatPrice } from "../ProductList";
 import Tag from "../Tag";
+import { useNavigate } from "react-router-dom";
+import { Game } from "../../models/Game";
+
+export const calculateTotalPrice = (items: Game[]) => {
+  return items.reduce((a, current) => {
+    return (a += current.prices.current!);
+  }, 0);
+};
 
 const Cart = () => {
+  const navigate = useNavigate();
   const { visible, items } = useSelector((state: RootReducer) => state.cart);
 
   const dispatch = useDispatch();
@@ -32,10 +41,9 @@ const Cart = () => {
     dispatch(remove(id));
   };
 
-  const calculateTotalPrice = () => {
-    return items.reduce((a, current) => {
-      return (a += current.prices.current!);
-    }, 0);
+  const redirectToCheckout = () => {
+    closeCart();
+    navigate("/checkout");
   };
 
   return (
@@ -63,10 +71,15 @@ const Cart = () => {
         </ul>
         <CartQuantity>{items.length} jogos no carrinho</CartQuantity>
         <CartPrice>
-          Total de {formatPrice(calculateTotalPrice())}
+          Total de {formatPrice(calculateTotalPrice(items))}
           <span>Em até 6x sem juros</span>
         </CartPrice>
-        <Button title="Finalizar compra" type="button">
+        <Button
+          onClick={redirectToCheckout}
+          title="Finalizar compra"
+          type="button"
+          disabled={!items.length}
+        >
           Continuar com a compra
         </Button>
       </CartAside>

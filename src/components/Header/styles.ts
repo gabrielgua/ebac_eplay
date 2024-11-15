@@ -38,6 +38,7 @@ export const HeaderBackground = styled.header`
 export const HeaderRow = styled.div`
   display: flex;
   align-items: center;
+  gap: 1rem;
   justify-content: space-between;
 
   &.invisible {
@@ -47,11 +48,11 @@ export const HeaderRow = styled.div`
 
 export const Links = styled.ul`
   display: flex;
+  gap: 1rem;
   flex-grow: 1;
 
   @media (max-width: 768px) {
     flex-direction: column;
-    gap: 1rem;
 
     * {
       display: block;

@@ -8,6 +8,7 @@ export type ButtonProps = {
   onClick?: () => void;
   $variant?: "primary" | "secondary" | "terciary";
   submit?: boolean;
+  disabled?: boolean;
 };
 
 const Button = ({
@@ -18,11 +19,13 @@ const Button = ({
   onClick,
   $variant: variant = "primary",
   submit,
+  disabled = false,
 }: ButtonProps) => {
   if (type === "button") {
     return (
       <ButtonContainer
         $variant={variant}
+        disabled={disabled}
         type={submit ? "submit" : "button"}
         title={title ? title : ""}
         onClick={onClick}
